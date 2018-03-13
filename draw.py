@@ -21,7 +21,11 @@ def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
     if curve_type == 'bezier':
         add_bezier_curve(points,x0,y0,x1,y1,x2,y2,x3,y3,step)
 
-
+'''
+hermite: adds a hermite curve to the edge matrix - takes 8 parameters (x0, y0, x1, y1, rx0, ry0, rx1, ry1)
+The curve is between points (x0, y0) and (x1, y1).
+(rx0, ry0) and (rx1, ry1) are the rates of change at each endpoint
+'''
 def add_hermite_curve( points, x0, y0, x1, y1, rx0, ry0, rx1, ry1, step ):
     x_p = x0
     y_p = y0
@@ -36,7 +40,11 @@ def add_hermite_curve( points, x0, y0, x1, y1, rx0, ry0, rx1, ry1, step ):
         x_p = x
         y_p = y
         t += step
-    
+'''
+bezier: adds a bezier curve to the edge matrix - takes 8 parameters (x0, y0, x1, y1, x2, y2, x3, y3)
+This curve is drawn between (x0, y0) and (x3, y3)
+(x1, y1) and (x2, y2) are the control points for the curve.
+'''
 def add_bezier_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step ):
     x_co = generate_curve_coefs( x0, x1, x2, x3, 'bezier' )
     y_co = generate_curve_coefs( y0, y1, y2, y3, 'bezier' )

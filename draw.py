@@ -3,17 +3,18 @@ from matrix import *
 
 
 def add_circle( points, cx, cy, cz, r, step ):
-    t = 0
-    while t <= step:
-        theta = 2*math.pi*t/step
-        x = cx+r*math.cos(theta)+cx
-        y = cy+r*math.sin(theta)+cy
-        z = cz
-        if t!=0 and t!=step:
-            add_point(points,x,y,z);
-        add_point(points,x,y,z)
-        t += 1
-
+    t = step
+    x_p = cx+r*math.cos(0)
+    y_p = cy+r*math.sin(0)
+    while t <= 1+step:
+        theta = (t)*2*math.pi
+        x = cx+r*math.cos(theta)
+        y = cy+r*math.sin(theta)
+        z = 0
+        add_edge(points, x_p, y_p, z, x, y, z)
+        x_p = x
+        y_p = y
+        t += step
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
     if curve_type == 'hermite':
         add_hermite_curve(points,x0,y0,x1,y1,x2,y2,x3,y3,step)
